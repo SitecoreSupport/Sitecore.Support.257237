@@ -140,7 +140,8 @@
                     clearFacetName = facet.substring(facet.indexOf('_') + 1);
                     facetSignature = facet.substr(0, facet.indexOf('_'));
                     if (searchResultsSignature === facetSignature && specialParams.indexOf(clearFacetName) === -1) {
-                        url += "&" + clearFacetName + "=" + escape(clearIdData(dataProp[facet]));
+                        //Fix 257237
+                        url += "&" + clearFacetName + "=" + encodeURIComponent(clearIdData(dataProp[facet]));
                     }
                 }
             }
@@ -162,7 +163,8 @@
                 if (specialParams.indexOf(clearParamName) !== -1) {
                     paramValue = typeof dataProp[param] !== "undefined" ? dataProp[param] : "";
                     if (searchResultsSignature === paramSignature) {
-                        url += "&" + clearParamName + "=" + paramValue;
+                        //Fix 257237
+                        url += "&" + clearParamName + "=" + encodeURIComponent(paramValue);
                     }
                 }
             }
